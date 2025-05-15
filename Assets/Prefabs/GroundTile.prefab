@@ -155,9 +155,9 @@ MonoBehaviour:
   coalPrefab: {fileID: 5253018711512930328, guid: 98661d6de3db092499f6583ebb927388, type: 3}
   pointsPrefab: {fileID: 8588061054967466627, guid: 8b222146fa41a324789772470d2d6e3d, type: 3}
   timeorbPrefab: {fileID: 8864624805005668522, guid: 05c1bb08d5c7e3b40a87536483a89f10, type: 3}
-  HandPrefab: {fileID: 7131211440996909089, guid: 596a9210d7a30f44d8619ea57b2b5b98, type: 3}
-  SpikePrefab: {fileID: 7631402123515686531, guid: e110621c8b5c5e949a52a7e058bf6348, type: 3}
-  portalPrefab: {fileID: 8753010554704024362, guid: 4a8f87d90d288bb4ab27ba95748d69c4, type: 3}
+  HandPrefab: {fileID: 482170772329241412, guid: 9c8c5f576922ef54f97741f9e980578a, type: 3}
+  SpikePrefab: {fileID: 6238548532364047174, guid: 7825f00b76984bc4dbb3b7d1fa6d5cad, type: 3}
+  portalPrefab: {fileID: 4816823636409530221, guid: bed39ebc19371f64186328799eceb129, type: 3}
 --- !u!1 &2014612807885907821
 GameObject:
   m_ObjectHideFlags: 0
