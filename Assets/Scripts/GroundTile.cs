@@ -70,6 +70,7 @@ public class GroundTile : MonoBehaviour
 
             obstacle.transform.position = GetRandomPointCollider(groundCollider); // Set the obstacle position to the spawn point position
             obstaclePosition = obstacle.transform.position; // Get the position of the obstacle
+            Destroy(obstacle, 500f); // Destroy after 500 seconds
         }
     }
 
@@ -89,6 +90,7 @@ public class GroundTile : MonoBehaviour
                 spawnPosition = GetRandomPointCollider(groundCollider);// Check if the coin position is the same as the obstacle position
             }
             temp.transform.position = spawnPosition;
+            Destroy(temp, 500f); // Destroy after 500 seconds
         }
 
         /*int pickUpsToSpawn = Random.Range(1, 4); // Randomly select the number of coins to spawn

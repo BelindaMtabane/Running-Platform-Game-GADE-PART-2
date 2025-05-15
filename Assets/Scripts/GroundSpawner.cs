@@ -94,19 +94,20 @@ public class GroundSpawner : MonoBehaviour
         segmentMap08.SetActive(true);
         yield return new WaitForSeconds(6);
         segmentMap09.SetActive(true);
-        segmentMap01.SetActive(false);
-        segmentMap02.SetActive(false);
-        segmentMap03.SetActive(false);
+        Destroy(segmentMap01);
+        Destroy(segmentMap02);
+        Destroy(segmentMap03);
         yield return new WaitForSeconds(6);
         segmentMap10.SetActive(true);
-        segmentMap04.SetActive(false);
-        segmentMap05.SetActive(false);
-        segmentMap06.SetActive(false);
-        segmentMap07.SetActive(false);
+        Destroy(segmentMap04);
+        Destroy(segmentMap05);
+        Destroy(segmentMap06);
         yield return new WaitForSeconds(7);
         segmentMap11.SetActive(true);
-        segmentMap08.SetActive(false);
-        segmentMap09.SetActive(false);
+        Destroy(segmentMap07);
+        Destroy(segmentMap08);
+        Destroy(segmentMap09);
+
 
     }
 }
