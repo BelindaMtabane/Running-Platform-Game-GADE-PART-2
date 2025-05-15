@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c72b09fce10fb4f499f135da510347d4
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 161892
+  packageName: Rusty plane
+  packageVersion: 1.0
+  assetPath: Assets/Rusty plane/Materials/Rusty plane.mat
+  uploadId: 351262

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ede375fa023cef64cbef944cb32947b5
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 161892
+  packageName: Rusty plane
+  packageVersion: 1.0
+  assetPath: Assets/Rusty plane/Prefabs/biplane.prefab
+  uploadId: 351262
