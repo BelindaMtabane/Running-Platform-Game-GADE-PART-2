@@ -58,7 +58,7 @@ public class PickUpCoin : MonoBehaviour
                     break;
                 case PickUpType.Coal:
                     // Add shield to the player
-                    playerMovement.AddShield(increaseCoal); // Call the AddShield method in the PlayerMovement script
+                    playerMovement.AddCoal(increaseCoal); // Call the AddShield method in the PlayerMovement script
                     break;
                 case PickUpType.TimeOrb:
                     // Add time to the player

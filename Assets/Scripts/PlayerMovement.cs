@@ -23,15 +23,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] TMP_Text scoreText;
     [SerializeField] TMP_Text deathScore;
     [SerializeField] TMP_Text healthText;
-    [SerializeField] TMP_Text shieldText;
+    [SerializeField] TMP_Text coalText;
     [SerializeField] private TMP_Text clockText; // Assign this in the Inspector
     float elapsedTime = 0f; // This is the elapsed time since the game started
 
     public int points = 0; // This is the score of the player
-    public int health = 120; // This is the health of the player
+    public int health = 50000; // This is the health of the player
     [SerializeField] int maxHealth = 100; // This is the maximum health of the player
-    private int shield = 0; // This is the shield of the player
-    [SerializeField] int maxShield = 100; // This is the maximum shield of the player
+    public int coal = 0; // This is the coal of the player
+
+    [SerializeField] int maxCoal = 100; // This is the maximum coal of the player
     private int timeOrb = 0; // This is the time orb of the player
     [SerializeField] private Obstacle obstacle;// Reference to the Obstacle script
 
@@ -54,10 +55,15 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isPlayerMoving = false; // Flag to track if the player is moving
 
+    GameObject deathMenu;
+
     void Start()
     {
+        deathMenu = GameObject.FindGameObjectWithTag("DeathMenu");
+        deathMenu.SetActive(false); // Hide the death menu at the start
         rigidbody = GetComponent<Rigidbody>();//This will control the PLayer's position in the game
         obstacle = GetComponent<Obstacle>();// This will control the Obstacle's position in the game
+       
     }
     public void StartCountdown()
     {
@@ -98,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
             // Check if the health drain timer has reached 1 second
             if (healthDrainTimer >= 1f)
             {
-                health -= 10;// This is the health drain per second
+                health -= 1;// This is the health drain per second
                 healthDrainTimer = 0f;// Reset the timer
                 if (health < 0) health = 0;// Ensure health does not go below 0
                 UpdateUI();// Update the UI with the new health value
@@ -166,11 +172,13 @@ public class PlayerMovement : MonoBehaviour
     }
     public void KillPlayer()
     {
+        deathMenu.SetActive(true);
         // This is method is currently not being used, it will be used when the player collides with a certain object
         isAlive = false; // Set the player to not alive
         // Restart the Game
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reload the current scene
+       //  SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reload the current scene
     }
+
     public void AddPoints(int pointsToAdd)
     {
         points += pointsToAdd; // Add points to the player's score
@@ -185,15 +193,25 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void AddShield(int shieldToAdd)
+    public void AddCoal(int coalToAdd)
     {
 
-        shield += shieldToAdd; // Add shield to the player's shield
-        Debug.Log("Shield: " + shield); // Log the current shield value
-        if (shield > maxShield) // Ensure shield does not exceed maxShield
+        coal += coalToAdd; // Add coal to the player's coal
+        Debug.Log("Coal calld: " + coal); // Log the current coal value
+        if (coal > maxCoal) // Ensure coal does not exceed maxCoal
         {
-            Debug.Log("Max Shield: " + maxShield); // Log the maximum shield value
-            shield = maxShield;
+            Debug.Log("Max Coal: " + maxCoal); // Log the maximum coal value
+            coal = maxCoal;
+        }
+    }
+
+    public void DeductCoal(int coalToDeduct)
+    {
+        coal -= coalToDeduct;
+        Debug.Log("Coal calld: " + coal); // Log the current coal value
+        if (coal < 0) // Ensure coal does not exceed maxCoal
+        {
+            coal = 0;
         }
     }
 
@@ -224,6 +242,6 @@ public class PlayerMovement : MonoBehaviour
         deathScore.text = "Score: " + points; // Update the death score text
         scoreText.text = "Score: " + points; // Update the score text
         healthText.text = "Health: " + health; // Update the health text
-        shieldText.text = "Coal: " + shield; // Update the shield text
+        coalText.text = "Coal: " + coal; // Update the coal text
     }
 }

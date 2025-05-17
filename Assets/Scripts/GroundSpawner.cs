@@ -69,6 +69,10 @@ public class GroundSpawner : MonoBehaviour
     public GameObject segmentMap09;
     public GameObject segmentMap10;
     public GameObject segmentMap11;
+    public GameObject segmentMap12;
+    public GameObject segmentMap13;
+    public GameObject segmentMap14;
+    public GameObject segmentMap15;
 
     void Start()
     {

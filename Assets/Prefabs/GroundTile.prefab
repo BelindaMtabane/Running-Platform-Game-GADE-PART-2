@@ -158,6 +158,8 @@ MonoBehaviour:
   HandPrefab: {fileID: 482170772329241412, guid: 9c8c5f576922ef54f97741f9e980578a, type: 3}
   SpikePrefab: {fileID: 6238548532364047174, guid: 7825f00b76984bc4dbb3b7d1fa6d5cad, type: 3}
   portalPrefab: {fileID: 4816823636409530221, guid: bed39ebc19371f64186328799eceb129, type: 3}
+  enemyPrefab: {fileID: 2246172224277798960, guid: 7f282d9eeca935a47bcff8abf414607a, type: 3}
+  tileIndex: 0
 --- !u!1 &2014612807885907821
 GameObject:
   m_ObjectHideFlags: 0

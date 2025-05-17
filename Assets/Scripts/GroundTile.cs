@@ -20,11 +20,18 @@ public class GroundTile : MonoBehaviour
     public GameObject portalPrefab;
     Vector3 obstaclePosition;
 
+  
+    public GameObject enemyPrefab; // to Assign in GroundSpawner when spawning
+    public int tileIndex; // Sets in GroundSpawner when spawning
+
+
     void Start()
     {
         groundSpawner = GameObject.FindAnyObjectByType<GroundSpawner>(); // Find the GroundSpawner script in the scene
         groundCollider = GetComponent<Collider>();
+
         SpawnObstacle(); // Call the SpawnObstacle method to spawn an obstacle
+        SpawnEnemy(); // Call the SpawnEnemy
         SpawnPickUps(); // Call the SpawnCoins method to spawn coins
     }
 
@@ -72,6 +79,28 @@ public class GroundTile : MonoBehaviour
             obstaclePosition = obstacle.transform.position; // Get the position of the obstacle
             Destroy(obstacle, 500f); // Destroy after 500 seconds
         }
+    }
+
+    void SpawnEnemy()
+    {
+
+        if (tileIndex < 1) return; // Don't spawn enemies on the first tile
+        GameObject enObj = Instantiate(enemyPrefab);
+
+        // try and get center if available
+        Vector3 enObjPos = GetCenterPointCollider(groundCollider);
+
+        if (Vector3.Distance(enObjPos, obstaclePosition) < 1.0f)
+        {
+            enObjPos = GetRandomPointCollider(groundCollider);
+            while (Vector3.Distance(enObjPos, obstaclePosition) < 1.0f)
+            {
+                enObjPos = GetRandomPointCollider(groundCollider);// Check if the coin position is the same as the obstacle position
+            }
+        }
+        
+        enObj.transform.position = new Vector3(enObjPos.x, enObjPos.y -0.3f, enObjPos.z);
+        Destroy(enObj, 500f);
     }
 
     void SpawnPickUps()
@@ -133,4 +162,39 @@ public class GroundTile : MonoBehaviour
         randomPoint.y = 1; // Set the Y coordinate to 1, matching it to the ground level
         return randomPoint;
     }
+
+    Vector3 GetCenterPointCollider(Collider collider)
+    {
+        Vector3 center = collider.bounds.center;
+        center.y = 1f;
+        return center;
+    }
 }
+
+/* public static int tileCounter = 0; // Static variable to keep track of the number of tiles spawned
+ * public gameObject enemyPrefab; // Prefab for the enemy
+ * public transform player; // Reference to the player transform
+ * 
+ * void start()
+ * {
+ * 
+ *       tile counter++; // Increment the tile counter when a new tile is spawned
+ *           if (tileCounter == 6) // Check if this is the 6th tile
+ *           {
+ *                   spawn enemy(); // Call the method to spawn the enemy
+ *           }
+ * }
+ * void spawn enemy()
+ * {
+ * 
+ *      Vector3 spawn position = player.position + player.forward * 2.0f; // Spawn the enemy in front of the player
+ * 
+ *      gameObject enemy = instantiate(enemyPrefab, spawnPosition, quaternion.identity); // Instantiate the enemy prefab
+ *      
+ *      vector3  lookAt = player.position; // Set the enemy's look-at position to the player's position
+ *      lookAt.y = enemy.transform.position.y; // Keep the Y coordinate the same
+ *      enemy.transform.LookAt(lookAt); // Make the enemy look at the player
+ * }
+ * 
+ * 
+ * */
