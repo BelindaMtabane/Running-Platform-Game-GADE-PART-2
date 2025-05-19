@@ -6,7 +6,7 @@ public class GroundTile : MonoBehaviour
     //public GameObject rockPrefab;
     [SerializeField] GameObject obstaclePrefab; // Prefab for the obstacle
     //[SerializeField] private Obstacle obstacleScript; // Assign this in the Inspector
-    Vector3 obstaclePositions; // Position to spawn the obstacle
+    // Position to spawn the obstacle
                                // [SerializeField] GameObject coinPrefab; // Prefab for the coin, {HealthCoin, SheinCoin, SpeedUpCoin, PointsCoin}
     public GameObject[] pickupPrefab;// Prefab for the pick up
     private Collider groundCollider;
@@ -19,8 +19,6 @@ public class GroundTile : MonoBehaviour
     public GameObject SpikePrefab;
     public GameObject portalPrefab;
     Vector3 obstaclePosition;
-
-  
     public GameObject enemyPrefab; // to Assign in GroundSpawner when spawning
     public int tileIndex; // Sets in GroundSpawner when spawning
 

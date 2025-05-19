@@ -55,12 +55,12 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isPlayerMoving = false; // Flag to track if the player is moving
 
-    GameObject deathMenu;
+   // GameObject deathMenu;
 
     void Start()
     {
-        deathMenu = GameObject.FindGameObjectWithTag("DeathMenu");
-        deathMenu.SetActive(false); // Hide the death menu at the start
+        //deathMenu = GameObject.FindGameObjectWithTag("DeathMenu");
+        //deathMenu.SetActive(false); // Hide the death menu at the start
         rigidbody = GetComponent<Rigidbody>();//This will control the PLayer's position in the game
         obstacle = GetComponent<Obstacle>();// This will control the Obstacle's position in the game
        
@@ -73,15 +73,16 @@ public class PlayerMovement : MonoBehaviour
     }
     public void StartMovement()
     {
-        //isPlayerMoving = true; // Set to true for player to move
+        isPlayerMoving = true; // Set to true for player to move
         countdownText.gameObject.SetActive(false); // Hide the countdown text
+        //FixedUpdate();
     }
 
     // Modify FixedUpdate to clamp the player's X position after movement
     // Add this field to track the health drain timer
     private float healthDrainTimer = 0f;
 
-    public void FixedUpdate()
+    void FixedUpdate()
     {
         if (!isAlive) return; // If the player is not alive, do not move
 
@@ -172,7 +173,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void KillPlayer()
     {
-        deathMenu.SetActive(true);
+       // deathMenu.SetActive(true);
         // This is method is currently not being used, it will be used when the player collides with a certain object
         isAlive = false; // Set the player to not alive
         // Restart the Game

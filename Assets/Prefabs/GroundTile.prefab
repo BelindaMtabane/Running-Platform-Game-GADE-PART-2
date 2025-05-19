@@ -151,10 +151,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstaclePrefab: {fileID: 5278501258699618783, guid: 98f21e6afeddb9c419f792799a1735b2, type: 3}
   pickupPrefab: []
-  healthPrefab: {fileID: 621584630249350254, guid: af9d1131c788d454fa7dae4544fa99d2, type: 3}
-  coalPrefab: {fileID: 5253018711512930328, guid: 98661d6de3db092499f6583ebb927388, type: 3}
-  pointsPrefab: {fileID: 8588061054967466627, guid: 8b222146fa41a324789772470d2d6e3d, type: 3}
-  timeorbPrefab: {fileID: 8864624805005668522, guid: 05c1bb08d5c7e3b40a87536483a89f10, type: 3}
+  healthPrefab: {fileID: 4856993604246129497, guid: 85c10287721256b4db361c6281fd63b0, type: 3}
+  coalPrefab: {fileID: 2438058047285665826, guid: 7e06752e6834e49479f77fc12b5333bd, type: 3}
+  pointsPrefab: {fileID: 1223494298831387111, guid: 8b30bc9d757ac82438b6f105c88042cd, type: 3}
+  timeorbPrefab: {fileID: 5814562266195803914, guid: a21cae2fc3fbccd4895b08c67f35d748, type: 3}
   HandPrefab: {fileID: 482170772329241412, guid: 9c8c5f576922ef54f97741f9e980578a, type: 3}
   SpikePrefab: {fileID: 6238548532364047174, guid: 7825f00b76984bc4dbb3b7d1fa6d5cad, type: 3}
   portalPrefab: {fileID: 4816823636409530221, guid: bed39ebc19371f64186328799eceb129, type: 3}
