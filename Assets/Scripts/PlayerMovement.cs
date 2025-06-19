@@ -55,7 +55,11 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isPlayerMoving = false; // Flag to track if the player is moving
 
+<<<<<<< Updated upstream
    // GameObject deathMenu;
+=======
+    [SerializeField] GameObject deathMenu;
+>>>>>>> Stashed changes
 
     void Start()
     {

@@ -43,7 +43,11 @@ PrefabInstance:
     - target: {fileID: 1279326074774801507, guid: e110621c8b5c5e949a52a7e058bf6348, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
+<<<<<<< Updated upstream
       objectReference: {fileID: 2100000, guid: 3936a9751699b6041ab43f0d9fa7548c, type: 2}
+=======
+      objectReference: {fileID: 2100000, guid: 95b345109073844d6b331ba688e237c7, type: 2}
+>>>>>>> Stashed changes
     - target: {fileID: 7107805428945269817, guid: e110621c8b5c5e949a52a7e058bf6348, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.76829624
