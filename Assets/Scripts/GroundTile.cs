@@ -27,7 +27,7 @@ public class GroundTile : MonoBehaviour
     {
         groundSpawner = GameObject.FindAnyObjectByType<GroundSpawner>(); // Find the GroundSpawner script in the scene
         groundCollider = GetComponent<Collider>();
-
+        
         SpawnObstacle(); // Call the SpawnObstacle method to spawn an obstacle
         SpawnEnemy(); // Call the SpawnEnemy
         SpawnPickUps(); // Call the SpawnCoins method to spawn coins
@@ -36,8 +36,13 @@ public class GroundTile : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         groundSpawner.SpawnTile(); // Call the SpawnTile method in the GroundSpawner script when the player exits the trigger
-
+        Destroy(gameObject, 2);
     }
+    /*private void OnCollisionExit(Collision collision)
+    {
+        groundSpawner.SpawnTile(); // Call the SpawnTile method in the GroundSpawner script when the player exits the trigger
+        Destroy(gameObject, 120);
+    }*/
 
     // Update is called once per frame
     void Update()
@@ -65,7 +70,7 @@ public class GroundTile : MonoBehaviour
         Transform spawnPoint = transform.GetChild(randomSpawnIndex).transform; // Get the spawn point from the child of the ground tile
         GameObject temp = Instantiate(obstacles[randomSpawnIndex]);
         obstaclePositions = spawnPoint.position; // Set the obstacle position to the spawn point position*/
-        int obstacleToSpawn = 5; // Number of pickups to spawn
+        int obstacleToSpawn = 4; // Number of pickups to spawn
         GameObject[] obstacles = { HandPrefab, SpikePrefab, portalPrefab }; // Array of obstacle prefabs
 
         for (int i = 0; i < obstacleToSpawn; i++)
@@ -75,7 +80,7 @@ public class GroundTile : MonoBehaviour
 
             obstacle.transform.position = GetRandomPointCollider(groundCollider); // Set the obstacle position to the spawn point position
             obstaclePosition = obstacle.transform.position; // Get the position of the obstacle
-            Destroy(obstacle, 500f); // Destroy after 500 seconds
+            Destroy(obstacle, 60); // Destroy after 500 seconds
         }
     }
 
@@ -98,12 +103,12 @@ public class GroundTile : MonoBehaviour
         }
         
         enObj.transform.position = new Vector3(enObjPos.x, enObjPos.y -0.3f, enObjPos.z);
-        Destroy(enObj, 500f);
+        Destroy(enObj, 20);
     }
 
     void SpawnPickUps()
     {
-        int pickupsToSpawn = 15; // Number of pickups to spawn
+        int pickupsToSpawn = 6; // Number of pickups to spawn
         GameObject[] pickups = { healthPrefab, coalPrefab, pointsPrefab, timeorbPrefab }; // Array of pickup prefabs
 
         for (int i = 0; i < pickupsToSpawn; i++)
@@ -117,7 +122,7 @@ public class GroundTile : MonoBehaviour
                 spawnPosition = GetRandomPointCollider(groundCollider);// Check if the coin position is the same as the obstacle position
             }
             temp.transform.position = spawnPosition;
-            Destroy(temp, 500f); // Destroy after 500 seconds
+            Destroy(temp, 60); // Destroy after 500 seconds
         }
 
         /*int pickUpsToSpawn = Random.Range(1, 4); // Randomly select the number of coins to spawn
