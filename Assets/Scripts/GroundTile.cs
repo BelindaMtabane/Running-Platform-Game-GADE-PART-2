@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GroundTile : MonoBehaviour
@@ -21,7 +22,8 @@ public class GroundTile : MonoBehaviour
     Vector3 obstaclePosition;
     public GameObject enemyPrefab; // to Assign in GroundSpawner when spawning
     public int tileIndex; // Sets in GroundSpawner when spawning
-
+    List<Vector3> usedPositions = new List<Vector3>();
+    float minDistance = 4f; // Minimum distance between spawned objects
 
     void Start()
     {
@@ -36,7 +38,7 @@ public class GroundTile : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         groundSpawner.SpawnTile(); // Call the SpawnTile method in the GroundSpawner script when the player exits the trigger
-        Destroy(gameObject, 2);
+        Destroy(gameObject, 60);
     }
     /*private void OnCollisionExit(Collision collision)
     {
@@ -78,8 +80,10 @@ public class GroundTile : MonoBehaviour
             int randomSpawnIndex = Random.Range(0, obstacles.Length); // Randomly select a pickup prefab from the array
             GameObject obstacle = Instantiate(obstacles[randomSpawnIndex]);
 
-            obstacle.transform.position = GetRandomPointCollider(groundCollider); // Set the obstacle position to the spawn point position
-            obstaclePosition = obstacle.transform.position; // Get the position of the obstacle
+            Vector3 spawnPos = GetSpacedPoint(groundCollider);
+            obstacle.transform.position = spawnPos;
+           /* obstacle.transform.position = GetRandomPointCollider(groundCollider); // Set the obstacle position to the spawn point position
+            obstaclePosition = obstacle.transform.position; */// Get the position of the obstacle
             Destroy(obstacle, 60); // Destroy after 500 seconds
         }
     }
@@ -111,20 +115,32 @@ public class GroundTile : MonoBehaviour
         int pickupsToSpawn = 6; // Number of pickups to spawn
         GameObject[] pickups = { healthPrefab, coalPrefab, pointsPrefab, timeorbPrefab }; // Array of pickup prefabs
 
-        for (int i = 0; i < pickupsToSpawn; i++)
+        /*for (int i = 0; i < pickupsToSpawn; i++)
         {
             int selectedPickUp = Random.Range(0, pickups.Length); // Randomly select a pickup prefab from the array
             GameObject temp = Instantiate(pickups[selectedPickUp]);
-            Vector3 spawnPosition = GetRandomPointCollider(groundCollider); // Set the position of the pickup to a random point within the collider
+            //Vector3 spawnPosition = GetRandomPointCollider(groundCollider); // Set the position of the pickup to a random point within the collider
             // Keep generating a new position if it's too close to the obstacle
-            while (Vector3.Distance(spawnPosition, obstaclePosition) < 1.0f)
+            Vector3 spawnPos = GetSpacedPoint(groundCollider);
+            while (Vector3.Distance(spawnPos, obstaclePosition) < 1.0f)
             {
-                spawnPosition = GetRandomPointCollider(groundCollider);// Check if the coin position is the same as the obstacle position
+                spawnPos = GetSpacedPoint(groundCollider);
+                //spawnPosition = GetRandomPointCollider(groundCollider);// Check if the coin position is the same as the obstacle position
             }
-            temp.transform.position = spawnPosition;
+            //temp.transform.position = spawnPosition;
+            temp.transform.position = spawnPos;
             Destroy(temp, 60); // Destroy after 500 seconds
-        }
+        }*/
+        for (int i = 0; i < pickupsToSpawn; i++)
+        {
+            int selected = Random.Range(0, pickups.Length);
+            GameObject pickup = Instantiate(pickups[selected]);
 
+            Vector3 spawnPos = GetSpacedPoint(groundCollider);
+            pickup.transform.position = spawnPos;
+
+            Destroy(pickup, 60);
+        }
         /*int pickUpsToSpawn = Random.Range(1, 4); // Randomly select the number of coins to spawn
         for (int i = 0; i < pickUpsToSpawn; i++)
         {
@@ -169,9 +185,43 @@ public class GroundTile : MonoBehaviour
     Vector3 GetCenterPointCollider(Collider collider)
     {
         Vector3 center = collider.bounds.center;
-        center.y = 1f;
+        center.y = 1f;// Set the Y coordinate to 1, matching it to the ground level
         return center;
     }
+    Vector3 GetSpacedPoint(Collider collider)
+    {
+        Vector3 point = GetRandomPointCollider(collider);// Generate a random point within the collider bounds
+        int attempts = 0;
+
+        while (!IsFarEnough(point) && attempts < 20)
+        {
+            point = GetRandomPointCollider(collider);// Generate a new random point within the collider bounds
+            Debug.Log("Collider bounds size: " + groundCollider.bounds.size);// Log the size of the collider bounds
+            attempts++;// Increment the attempts counter
+        }
+
+        usedPositions.Add(point);// Add the point to the list of used positions
+        return point;
+    }
+
+    bool IsFarEnough(Vector3 point)
+    {
+        foreach (Vector3 used in usedPositions)
+        {
+            float xDiff = Mathf.Abs(point.x - used.x);
+            float zDiff = Mathf.Abs(point.z - used.z);
+
+            if (xDiff < minDistance || zDiff < minDistance)
+            {
+                
+                return false; // Too close in both X and Z
+            }
+        }
+        Debug.Log("Point is far enough from all used positions.");
+
+        return true;
+    }
+
 }
 
 /* public static int tileCounter = 0; // Static variable to keep track of the number of tiles spawned
