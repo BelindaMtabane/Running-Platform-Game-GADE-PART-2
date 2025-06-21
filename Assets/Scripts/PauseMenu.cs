@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;//Pause menu game object
+    [SerializeField] private GameObject controlMenu;
+    [SerializeField] private GameObject levelMenu;
 
     public void PauseGame()
     {
@@ -28,4 +30,48 @@ public class PauseMenu : MonoBehaviour
     
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reload the current scene
     }
+    public void ControlPanel()
+    {
+        Time.timeScale = 0; // Time to stop
+        controlMenu.SetActive(true);//Load the control panel
+        pauseMenu.SetActive(false);//Hide the pause menu
+    }
+    public void CloseControlPanel()
+    {
+        Time.timeScale = 0; // Time to normal
+        controlMenu.SetActive(false);//Hide the control panel
+        pauseMenu.SetActive(true);//Show the pause menu again
+    }
+    public void LevelMenu()
+    {
+        Time.timeScale = 0; // Time to stop
+        levelMenu.SetActive(true);//Load the level menu
+        pauseMenu.SetActive(false);//Hide the pause menu
+    }
+    public void RestartLevelMenu() 
+    {
+        Time.timeScale = 0; // Time to normal
+        levelMenu.SetActive(false);//Hide the level menu
+        pauseMenu.SetActive(true);//Show the pause menu again
+    }
+    /*public void playerStats()
+    {
+        Time.timeScale = 0; // Time to stop
+        playerStats.SetActive(true);//Load the player stats
+        pauseMenu.SetActive(false);//Hide the pause menu
+    }
+    public void levelOne()
+    {
+        levelMenu.SetActive(false);
+        SceneManager.LoadScene("SampleScene");//Load level one
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);//Restart the game
+        Time.timeScale = 1; // Time to normal
+    }
+    public void levelTwo()
+    {
+        levelMenu.SetActive(false);
+        SceneManager.LoadScene("LevelTwo");//Load level two
+        Time.timeScale = 1; // Time to normal
+    }
+        */
 }
