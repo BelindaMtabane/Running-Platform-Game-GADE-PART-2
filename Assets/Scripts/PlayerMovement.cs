@@ -104,6 +104,11 @@ public class PlayerMovement : MonoBehaviour
         rigidbody.angularVelocity = Vector3.zero;
     }
 
+    public void NextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); // Load the next scene
+    }
+
     // Modify FixedUpdate to clamp the player's X position after movement
     // Add this field to track the health drain timer
     private float healthDrainTimer = 0f;
@@ -195,6 +200,15 @@ public class PlayerMovement : MonoBehaviour
                 }
 
             }
+
+            // check if the player has reached a 100th points interval, can be 100, 200, 300, etc.
+            // This checks if the player points devided by 100 has no remainder
+            if (points % 100 == 0 && points > 0)
+            {
+                // Go to the next level
+                NextLevel(); // Call the NextLevel method to load the next scene
+            }
+
         }
 
         if (!isPlayerMoving)
