@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GroundTile : MonoBehaviour
 {
     GroundSpawner groundSpawner; // Reference to the GroundSpawner script
+    public GameManager gameManager;
     //public GameObject rockPrefab;
     [SerializeField] GameObject obstaclePrefab; // Prefab for the obstacle
     //[SerializeField] private Obstacle obstacleScript; // Assign this in the Inspector
@@ -25,12 +27,19 @@ public class GroundTile : MonoBehaviour
     List<Vector3> usedPositions = new List<Vector3>();
     float minDistance = 4f; // Minimum distance between spawned objects
 
+    public static int obstacleScore = 0; // Static variable to keep track of the number of obstacles passed
+
     void Start()
     {
+       
         groundSpawner = GameObject.FindAnyObjectByType<GroundSpawner>(); // Find the GroundSpawner script in the scene
         groundCollider = GetComponent<Collider>();
-        
-        SpawnObstacle(); // Call the SpawnObstacle method to spawn an obstacle
+        GameManager gameManager = GameObject.FindAnyObjectByType<GameManager>(); // Find the GameManager script in the scene
+        if (gameManager != null)
+        {
+            gameManager.OnSpawnObstacle += HandleSpawnObstacle;
+        }
+
         SpawnEnemy(); // Call the SpawnEnemy
         SpawnPickUps(); // Call the SpawnCoins method to spawn coins
     }
@@ -52,39 +61,22 @@ public class GroundTile : MonoBehaviour
 
     }
 
-    void SpawnObstacle()
+    private void HandleSpawnObstacle(object sender, EventArgs e)
     {
-        /*
-         * 
-         * GameObject[] obstacles = { HandPrefab, SpikePrefab, portalPrefab};
-         * int randomSpawnIndex = Random.Range(2, 5); // Randomly select a spawn index for the obstacle
-        Transform spawnPoint = transform.GetChild(randomSpawnIndex).transform; // Get the spawn point from the child of the ground tile
-        // Randomly choose an ObstacleType from the enum
-        //Obstacle.ObstacleTypes randomObstacleType = (Obstacle.ObstacleTypes)Random.Range(0, System.Enum.GetValues(typeof(Obstacle.ObstacleTypes)).Length);
-
-        // Instantiate the prefab directly using the selected ObstacleType
-        //GameObject obstaclePrefab = obstacleScript.obstacleTypes[(int)randomObstacleType];
-        //GameObject obstaclePrefabs = Instantiate(obstaclePrefab, spawnPoint.position, Quaternion.identity, transform); // Instantiate the obstacle prefab at the spawn point
-        GameObject temp = Instantiate(obstacles[selectedObstacle]);
-        obstaclePositions = spawnPoint.position;/* // Set the obstacle position to the spawn point position*/
-        /*GameObject[] obstacles = { HandPrefab, SpikePrefab, portalPrefab };
-        int randomSpawnIndex = Random.Range(2, 5); // Randomly select a spawn index for the obstacle
-        Transform spawnPoint = transform.GetChild(randomSpawnIndex).transform; // Get the spawn point from the child of the ground tile
-        GameObject temp = Instantiate(obstacles[randomSpawnIndex]);
-        obstaclePositions = spawnPoint.position; // Set the obstacle position to the spawn point position*/
         int obstacleToSpawn = 4; // Number of pickups to spawn
         GameObject[] obstacles = { HandPrefab, SpikePrefab, portalPrefab }; // Array of obstacle prefabs
 
         for (int i = 0; i < obstacleToSpawn; i++)
         {
-            int randomSpawnIndex = Random.Range(0, obstacles.Length); // Randomly select a pickup prefab from the array
+            int randomSpawnIndex = UnityEngine.Random.Range(0, obstacles.Length); // Randomly select a pickup prefab from the array
             GameObject obstacle = Instantiate(obstacles[randomSpawnIndex]);
 
             Vector3 spawnPos = GetSpacedPoint(groundCollider);
             obstacle.transform.position = spawnPos;
-           /* obstacle.transform.position = GetRandomPointCollider(groundCollider); // Set the obstacle position to the spawn point position
-            obstaclePosition = obstacle.transform.position; */// Get the position of the obstacle
-            Destroy(obstacle, 60); // Destroy after 500 seconds
+            GameManager.Instance.obstacleScore++;
+            Debug.Log("Obstacle Passed. Score: " + GameManager.Instance.obstacleScore);
+
+            Destroy(obstacle, 60); // Destroy after 60 seconds
         }
     }
 
@@ -115,64 +107,22 @@ public class GroundTile : MonoBehaviour
         int pickupsToSpawn = 6; // Number of pickups to spawn
         GameObject[] pickups = { healthPrefab, coalPrefab, pointsPrefab, timeorbPrefab }; // Array of pickup prefabs
 
-        /*for (int i = 0; i < pickupsToSpawn; i++)
-        {
-            int selectedPickUp = Random.Range(0, pickups.Length); // Randomly select a pickup prefab from the array
-            GameObject temp = Instantiate(pickups[selectedPickUp]);
-            //Vector3 spawnPosition = GetRandomPointCollider(groundCollider); // Set the position of the pickup to a random point within the collider
-            // Keep generating a new position if it's too close to the obstacle
-            Vector3 spawnPos = GetSpacedPoint(groundCollider);
-            while (Vector3.Distance(spawnPos, obstaclePosition) < 1.0f)
-            {
-                spawnPos = GetSpacedPoint(groundCollider);
-                //spawnPosition = GetRandomPointCollider(groundCollider);// Check if the coin position is the same as the obstacle position
-            }
-            //temp.transform.position = spawnPosition;
-            temp.transform.position = spawnPos;
-            Destroy(temp, 60); // Destroy after 500 seconds
-        }*/
         for (int i = 0; i < pickupsToSpawn; i++)
         {
-            int selected = Random.Range(0, pickups.Length);
+            int selected = UnityEngine.Random.Range(0, pickups.Length);
             GameObject pickup = Instantiate(pickups[selected]);
 
             Vector3 spawnPos = GetSpacedPoint(groundCollider);
             pickup.transform.position = spawnPos;
-
             Destroy(pickup, 60);
         }
-        /*int pickUpsToSpawn = Random.Range(1, 4); // Randomly select the number of coins to spawn
-        for (int i = 0; i < pickUpsToSpawn; i++)
-        {
-            Vector3 pickUpPosition = GetRandomCoinPointCollider(GetComponent<Collider>());  // Set the position of the coin to a random point within the collider
-
-            // Keep generating a new position if it's too close to the obstacle
-            while (Vector3.Distance(pickUpPosition, obstaclePositions) < 1.0f)
-            {
-                pickUpPosition = GetRandomCoinPointCollider(GetComponent<Collider>());// Check if the coin position is the same as the obstacle position
-            }
-
-            // Random Y rotation but no rotation in X and Z
-            Quaternion pickUpRotation = Quaternion.Euler(90, 0, 0);
-            // Randomly choose one of the pickup prefabs
-            GameObject selectedPrefab = pickupPrefab[Random.Range(0, pickupPrefab.Length)];
-            GameObject temp = Instantiate(selectedPrefab, pickUpPosition, pickUpRotation, transform); // Spawn coin
-            PickUpCoin pickUpScript = temp.GetComponent<PickUpCoin>();
-
-            if (pickUpScript != null)
-            {
-                int typeCount = System.Enum.GetValues(typeof(PickUpCoin.PickUpType)).Length;
-               // pickUpScript.pickUpType = (PickUpCoin.PickUpType)Random.Range(0, typeCount);
-                //pickUpScript.pickUpType = pickUpType;// Set the pickup type
-            }
-        }*/
     }
     Vector3 GetRandomPointCollider(Collider collider)
     {
         Vector3 randomPoint = new Vector3(
-            Random.Range(collider.bounds.min.x, collider.bounds.max.x),
-            Random.Range(collider.bounds.min.y, collider.bounds.max.y),
-            Random.Range(collider.bounds.min.z, collider.bounds.max.z)
+            UnityEngine.Random.Range(collider.bounds.min.x, collider.bounds.max.x),
+            UnityEngine.Random.Range(collider.bounds.min.y, collider.bounds.max.y),
+            UnityEngine.Random.Range(collider.bounds.min.z, collider.bounds.max.z)
         ); // Generate a random point within the bounds of the collider
         if (randomPoint != collider.ClosestPoint(randomPoint))
         {
@@ -191,7 +141,7 @@ public class GroundTile : MonoBehaviour
     Vector3 GetSpacedPoint(Collider collider)
     {
         Vector3 point = GetRandomPointCollider(collider);// Generate a random point within the collider bounds
-        int attempts = 0;
+        int attempts = 0;// Counter for attempts to find a valid point
 
         while (!IsFarEnough(point) && attempts < 20)
         {
@@ -208,8 +158,8 @@ public class GroundTile : MonoBehaviour
     {
         foreach (Vector3 used in usedPositions)
         {
-            float xDiff = Mathf.Abs(point.x - used.x);
-            float zDiff = Mathf.Abs(point.z - used.z);
+            float xDiff = Mathf.Abs(point.x - used.x);// Calculate the absolute differences in X coordinates
+            float zDiff = Mathf.Abs(point.z - used.z);// Calculate the absolute differences in X and Z coordinates
 
             if (xDiff < minDistance || zDiff < minDistance)
             {
@@ -219,7 +169,7 @@ public class GroundTile : MonoBehaviour
         }
         Debug.Log("Point is far enough from all used positions.");
 
-        return true;
+        return true;// Point is far enough from all used positions
     }
 
 }
