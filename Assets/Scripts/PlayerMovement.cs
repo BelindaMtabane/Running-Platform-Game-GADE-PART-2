@@ -224,8 +224,22 @@ public class PlayerMovement : MonoBehaviour
        // deathMenu.SetActive(true);
         // This is method is currently not being used, it will be used when the player collides with a certain object
         isAlive = false; // Set the player to not alive
-        // Restart the Game
-       //  SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reload the current scene
+                         // Restart the Game
+                         //  SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reload the current scene
+
+        // Log current stats
+        Debug.Log(PlayerStatsManager.Instance.allGames);
+
+        // Save this game's stats
+        var record = new PlayerStatsRecord
+        {
+            points = this.points,
+            health = this.health,
+            coal = this.coal,
+            elapsedTime = 0,
+            dateTime = System.DateTime.Now.ToString()
+        };
+        PlayerStatsManager.Instance.AddGame(record);
     }
 
     public void AddPoints(int pointsToAdd)
