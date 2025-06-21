@@ -13,8 +13,8 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        playerMovement = player.GetComponent<PlayerMovement>();
+        playerMovement = PlayerMovement.Instance; // Get the PlayerMovement instance
+        player = playerMovement.transform; // Assign the player's transform
     }
 
     public void EnableMenu()
