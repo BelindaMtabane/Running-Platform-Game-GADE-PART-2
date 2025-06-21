@@ -1,2 +1,20 @@
 fileFormatVersion: 2
 guid: 9a4fb106ae076461c8cabaefc81fd620
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - obstaclePrefab: {instanceID: 0}
+  - healthPrefab: {instanceID: 0}
+  - coalPrefab: {instanceID: 0}
+  - pointsPrefab: {instanceID: 0}
+  - timeorbPrefab: {instanceID: 0}
+  - HandPrefab: {instanceID: 0}
+  - SpikePrefab: {instanceID: 0}
+  - portalPrefab: {instanceID: 0}
+  - enemyPrefab: {fileID: 8753287312897261738, guid: d6fdbff2fe997174a8ea7603e6b8dc32, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

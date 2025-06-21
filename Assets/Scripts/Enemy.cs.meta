@@ -1,2 +1,16 @@
 fileFormatVersion: 2
 guid: cb62a1e89e6a9694780ae865c8127675
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - player: {instanceID: 0}
+  - deathMenu: {instanceID: 0}
+  - enemyPrefab: {fileID: 3011868141599834431, guid: d6fdbff2fe997174a8ea7603e6b8dc32, type: 3}
+  - ObstacleCollision: {instanceID: 0}
+  - animator: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -91,7 +91,7 @@ public class GroundTile : MonoBehaviour
     void SpawnEnemy()
     {
 
-        if (tileIndex < 1) return; // Don't spawn enemies on the first tile
+        //if (tileIndex < 1) return; // Don't spawn enemies on the first tile
         GameObject enObj = Instantiate(enemyPrefab);
 
         // try and get center if available

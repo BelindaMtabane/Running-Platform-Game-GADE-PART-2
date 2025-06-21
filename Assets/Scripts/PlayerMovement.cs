@@ -97,6 +97,13 @@ public class PlayerMovement : MonoBehaviour
         //FixedUpdate();
     }
 
+    public void StopMovement()
+    {
+        isPlayerMoving = false;
+        rigidbody.linearVelocity = Vector3.zero;
+        rigidbody.angularVelocity = Vector3.zero;
+    }
+
     // Modify FixedUpdate to clamp the player's X position after movement
     // Add this field to track the health drain timer
     private float healthDrainTimer = 0f;
@@ -188,6 +195,14 @@ public class PlayerMovement : MonoBehaviour
                 }
 
             }
+        }
+
+        if (!isPlayerMoving)
+        {
+            // stop the player from moving
+            // Stop the player's movement by zeroing out the velocity
+            rigidbody.linearVelocity = Vector3.zero;
+            rigidbody.angularVelocity = Vector3.zero;
         }
     }
     public void KillPlayer()
