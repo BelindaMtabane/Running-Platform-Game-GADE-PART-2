@@ -29,14 +29,7 @@ public class PickUpCoin : MonoBehaviour
     {
 
         // Check if the object that entered the trigger is the player
-        GameObject player = GameObject.Find("Player");
-        if (player == null)
-        {
-            Debug.LogError("Player GameObject with tag 'Player' not found! Assign the 'Player' tag in the Inspector.");
-            return;
-        }
-
-        playerMovement = player.GetComponent<PlayerMovement>();
+        playerMovement = PlayerMovement.Instance; // Get the PlayerMovement instance
 
         pickUpPrefabs = new GameObject[4]; // Initialize the array with 3 elements
     }

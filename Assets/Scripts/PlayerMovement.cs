@@ -15,6 +15,7 @@ if (isPlayerMoving && isAlive)
 }*/
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement Instance; // Singleton instance of PlayerMovement
     public bool isAlive = true; // This is a flag to check if the player is alive
     [SerializeField] public float speed = 9f; // This is the speed of the player
     public new Rigidbody rigidbody; // Reference to the Rigidbody component
@@ -61,7 +62,19 @@ public class PlayerMovement : MonoBehaviour
    // GameObject deathMenu;
 
     [SerializeField] GameObject deathMenu;
-//// Stashed changes
+    //// Stashed changes
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this; // Set the singleton instance
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject); // Ensure only one instance exists
+        }
+    }
 
     void Start()
     {
