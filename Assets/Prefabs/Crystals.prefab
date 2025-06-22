@@ -10,27 +10,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: f0721c1c15def074bb6594b0a01e1ff8, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.6
+      value: 2.02
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f0721c1c15def074bb6594b0a01e1ff8, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.6
+      value: 2.02
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f0721c1c15def074bb6594b0a01e1ff8, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.6
+      value: 2.02
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f0721c1c15def074bb6594b0a01e1ff8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.654803
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f0721c1c15def074bb6594b0a01e1ff8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.11449003
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f0721c1c15def074bb6594b0a01e1ff8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.7268105
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f0721c1c15def074bb6594b0a01e1ff8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -64,6 +64,18 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6417380655797928620, guid: f0721c1c15def074bb6594b0a01e1ff8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1ece9ab532c449045bc78db9967c7620, type: 2}
+    - target: {fileID: -4227899932053519392, guid: f0721c1c15def074bb6594b0a01e1ff8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2d6554986551ddf4890d1f9c571fa489, type: 2}
+    - target: {fileID: -2626845507066907506, guid: f0721c1c15def074bb6594b0a01e1ff8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2d6554986551ddf4890d1f9c571fa489, type: 2}
     - target: {fileID: 919132149155446097, guid: f0721c1c15def074bb6594b0a01e1ff8, type: 3}
       propertyPath: m_Name
       value: Crystals
@@ -72,6 +84,18 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Obstacle
       objectReference: {fileID: 0}
+    - target: {fileID: 3713216027794734220, guid: f0721c1c15def074bb6594b0a01e1ff8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2d6554986551ddf4890d1f9c571fa489, type: 2}
+    - target: {fileID: 7774538584566148371, guid: f0721c1c15def074bb6594b0a01e1ff8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2d6554986551ddf4890d1f9c571fa489, type: 2}
+    - target: {fileID: 8956542188106733861, guid: f0721c1c15def074bb6594b0a01e1ff8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1ece9ab532c449045bc78db9967c7620, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
