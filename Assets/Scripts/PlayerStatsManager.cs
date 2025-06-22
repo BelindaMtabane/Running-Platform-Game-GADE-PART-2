@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerStatsManager : MonoBehaviour
 {
-    public static PlayerStatsManager Instance;
+    public static PlayerStatsManager Instance { get; private set; }
     public List<PlayerStatsRecord> allGames = new List<PlayerStatsRecord>();
 
     private void Awake()

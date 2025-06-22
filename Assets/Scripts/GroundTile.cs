@@ -131,7 +131,7 @@ public class GroundTile : MonoBehaviour
         randomPoint.y = 1; // Set the Y coordinate to 1, matching it to the ground level
         return randomPoint;
     }
-
+    //ycyicuiviohbopnopbpiboipbopon
     Vector3 GetCenterPointCollider(Collider collider)
     {
         Vector3 center = collider.bounds.center;

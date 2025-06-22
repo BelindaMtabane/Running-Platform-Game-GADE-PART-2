@@ -26,7 +26,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0136abae75221dc4e8e1ba4f9d24c63b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.91
+      value: 0.78
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0136abae75221dc4e8e1ba4f9d24c63b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -77,9 +77,6 @@ PrefabInstance:
       addedObject: {fileID: 8873584327637993196}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0136abae75221dc4e8e1ba4f9d24c63b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4437198884486814166}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0136abae75221dc4e8e1ba4f9d24c63b, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 3612286051506195245}
   m_SourcePrefab: {fileID: 100100000, guid: 0136abae75221dc4e8e1ba4f9d24c63b, type: 3}
 --- !u!1 &8864624805005668522 stripped
@@ -113,24 +110,6 @@ MonoBehaviour:
   isScaling: 0
   useEasingForScaling: 1
   scaleLerpSpeed: 0
---- !u!114 &4437198884486814166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8864624805005668522}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 632b82133ee634bab8b01635ae007375, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pickUpType: 3
-  playerMovement: {fileID: 0}
-  increasePoints: 10
-  increaseHealth: 10
-  increaseCoal: 10
-  increaseTimeorb: 5
 --- !u!64 &3612286051506195245
 MeshCollider:
   m_ObjectHideFlags: 0

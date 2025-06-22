@@ -7,11 +7,12 @@ public class Enemy : MonoBehaviour
     public Transform player; // Assign the player's transform in the Inspector
     public int enemyHealth = 50; // Set this value as needed
     private PlayerMovement playerMovement;
-    [SerializeField] GameObject deathMenu;
+   // [SerializeField] GameObject deathMenu;
+    Obstacle obstacleScript; // Reference to the Obstacle script
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] TMP_Text ObstacleCollision;
     public Animator animator;
-
+    AudioManager audioManager; // Reference to the AudioManager script
     private bool isPlayerInTrigger = false;
     [SerializeField] float followSpeed = 3f; // Adjust as needed
 
@@ -20,16 +21,23 @@ public class Enemy : MonoBehaviour
         playerMovement = PlayerMovement.Instance; // Get the PlayerMovement instance
         player = playerMovement.transform; // Assign the player's transform
         animator = GetComponent<Animator>();
+        obstacleScript = GameObject.FindAnyObjectByType<Obstacle>(); // Find the Obstacle script in the scene
+        obstacleScript = GetComponent<Obstacle>();// This will control the Obstacle's position in the game
+        audioManager.PlaySoundEffects(audioManager.enemy); // Play the enemy sound effect
     }
 
-    public void EnableMenu()
+    private void Awake()
     {
-        GameObject deathMenu = GameObject.FindGameObjectWithTag("DeathMenu");
-        deathMenu.SetActive(true);// This will make the death menu appear
+        audioManager = GameObject.FindFirstObjectByType<AudioManager>(); // Find the AudioManager in the scene
+        if (audioManager == null)
+        {
+            Debug.LogError("AudioManager not found in the scene!"); // Log an error if AudioManager is not found
+        }
     }
 
     void Update()
     {
+        //audioManager.PlaySoundEffects(audioManager.enemy); // Play the enemy sound effect
         Vector3 direction = player.position - transform.position;
         direction.y = 0; // Keep only the horizontal direction
         if (direction != Vector3.zero)
@@ -43,12 +51,12 @@ public class Enemy : MonoBehaviour
             // Move towards the player
             direction.y = 0; // Keep movement horizontal
             transform.position += direction * followSpeed * Time.deltaTime;
-
             // Look at the player
             if (direction != Vector3.zero)
             {
                 Quaternion rotation = Quaternion.LookRotation(direction);
                 transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 5f);
+                
             }
         }
     }
@@ -63,7 +71,7 @@ public class Enemy : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Enemy collided with the Player!");
-
+            
             playerMovement.StopMovement();
             isPlayerInTrigger = true; // Set the flag to true when the player enters the trigger
 
@@ -89,10 +97,10 @@ public class Enemy : MonoBehaviour
         animator.SetTrigger("BattleCry");
         Time.timeScale = 0; // Freezes game
                             //deathMenu.SetActive(true); // This makes the death menu appear
-
-        EnableMenu(); // Call the EnableMenu method to show the death menu
-                      // Update the UI text
-        ObstacleCollision.text = "You have been killed by the Monster";
+        Debug.Log("ResetBattleCryttack called");
+        //obstacleScript.EnableMenu(); // Call the EnableMenu method to show the death menu
+        // Update the UI text
+       // ObstacleCollision.text = "You have been killed by the Monster";
     }
 
     void ContinueGame()

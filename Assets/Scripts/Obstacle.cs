@@ -9,17 +9,24 @@ public class Obstacle : MonoBehaviour
     //[SerializeField] private Obstacle obstacleScript; // Reference to the Obstacle script
     //PlayerMovement playerMovement;// Call the Player movement class
     [SerializeField] GameObject deathMenu; // Reference to the Death Menu (assigned in the Inspector)
-    [SerializeField] TMP_Text ObstacleCollision; // Reference to the Death Score (assigned in the Inspector)
+    [SerializeField] public TMP_Text ObstacleCollision; // Reference to the Death Score (assigned in the Inspector)
+    AudioManager audioManager; // Reference to the AudioManager script
     //[SerializeField] GameObject woodenSpikes; // Reference to the Wooden Spike (assigned in the Inspector)
     //[SerializeField] GameObject portalGates; // Reference to the Evil Hands (assigned in the Inspector)
     //private Rigidbody playerRigid;//This will be attached to the Player to allow gravity to interact on the Player's physics
     //[SerializeField] EvilHands evilHands; // Reference to the EvilHands script
     //[SerializeField] WoodenSpike woodenSpike; // Reference to the WoodenSpike script
     //private PortalGateWay portalGateWay; // Reference to the PortalGateWay script*/
-
+    private void Awake()
+    {
+        audioManager = GameObject.FindFirstObjectByType<AudioManager>();
+    }
     public void EnableMenu()
     {
         deathMenu.SetActive(true);// This will make the death menu appear
+        //audioManager.Start(false); // Start the background music
+        audioManager.PlaySoundEffects(audioManager.death); // Play the death sound effect
+    
     }
 
     void Start()

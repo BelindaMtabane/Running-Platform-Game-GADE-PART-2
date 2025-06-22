@@ -9,6 +9,10 @@ TagManager:
   - PortalGateway
   - Spike
   - DeathMenu
+  - Enemy
+  - Bullet
+  - pickups
+  - Audio
   layers:
   - Default
   - TransparentFX

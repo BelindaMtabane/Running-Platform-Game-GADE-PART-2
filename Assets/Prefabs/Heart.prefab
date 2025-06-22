@@ -77,9 +77,6 @@ PrefabInstance:
       addedObject: {fileID: 757868001915144391}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 80844d124bb3cb54893e9d8bf21ba7e2, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4160448985968535242}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 80844d124bb3cb54893e9d8bf21ba7e2, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 6130382035356914760}
   m_SourcePrefab: {fileID: 100100000, guid: 80844d124bb3cb54893e9d8bf21ba7e2, type: 3}
 --- !u!1 &621584630249350254 stripped
@@ -113,24 +110,6 @@ MonoBehaviour:
   isScaling: 0
   useEasingForScaling: 1
   scaleLerpSpeed: 0
---- !u!114 &4160448985968535242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 621584630249350254}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 632b82133ee634bab8b01635ae007375, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pickUpType: 0
-  playerMovement: {fileID: 0}
-  increasePoints: 10
-  increaseHealth: 10
-  increaseCoal: 10
-  increaseTimeorb: 5
 --- !u!64 &6130382035356914760
 MeshCollider:
   m_ObjectHideFlags: 0

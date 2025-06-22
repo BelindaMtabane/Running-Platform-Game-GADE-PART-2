@@ -59,7 +59,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0; // Time to stop
         playerStats.SetActive(true);//Load the player stats
         pauseMenu.SetActive(false);//Hide the pause menu
-    }
+    }*/
     public void levelOne()
     {
         levelMenu.SetActive(false);
@@ -67,7 +67,7 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);//Restart the game
         Time.timeScale = 1; // Time to normal
     }
-    public void levelTwo()
+    /*public void levelTwo()
     {
         levelMenu.SetActive(false);
         SceneManager.LoadScene("LevelTwo");//Load level two

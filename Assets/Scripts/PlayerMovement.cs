@@ -62,10 +62,13 @@ public class PlayerMovement : MonoBehaviour
    // GameObject deathMenu;
 
     [SerializeField] GameObject deathMenu;
+    AudioManager audioManager; // Reference to the AudioManager script
     //// Stashed changes
 
     private void Awake()
     {
+        audioManager = GameObject.FindFirstObjectByType<AudioManager>();
+
         if (Instance == null)
         {
             Instance = this; // Set the singleton instance
@@ -221,12 +224,21 @@ public class PlayerMovement : MonoBehaviour
     }
     public void KillPlayer()
     {
-       // deathMenu.SetActive(true);
+        if (deathMenu != null)
+        {
+            deathMenu.SetActive(true);
+            audioManager.PlaySoundEffects(audioManager.death); // Play the death sound effect
+            Debug.Log("Player has died!"); // Log that the player has died
+        }
+        else
+        { 
+            Debug.LogError("Death menu is null!");
+        }
         // This is method is currently not being used, it will be used when the player collides with a certain object
         isAlive = false; // Set the player to not alive
                          // Restart the Game
                          //  SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reload the current scene
-
+        obstacle.ObstacleCollision.text = "You have been killed by an Enemy!"; // Update the UI text with the death message
         // Log current stats
         Debug.Log(PlayerStatsManager.Instance.allGames);
 
