@@ -378,7 +378,7 @@ MonoBehaviour:
   isAlive: 1
   speed: 10
   rigidbody: {fileID: 25367220}
-  maxTimeOrb: 10
+  maxTimeOrb: -3
   scoreText: {fileID: 524604637}
   deathScore: {fileID: 717673130}
   healthText: {fileID: 1252122107}
@@ -7707,6 +7707,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundTilePrefab: {fileID: 1679264398347904330, guid: 1aeeb4e41cf65184d85d633791dba120, type: 3}
   LevelChange: 0
+  enemySpawnStartIndex: 3
 --- !u!4 &1818484560
 Transform:
   m_ObjectHideFlags: 0
