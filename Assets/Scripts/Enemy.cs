@@ -107,6 +107,7 @@ public class Enemy : MonoBehaviour
     {
         playerMovement.DeductCoal(enemyHealth); // Deduct coal the player used to kill enemy
         playerMovement.StartMovement(); // Resume player movement
+        Destroy(gameObject); // Destroy the enemy game object
     }
 }
 

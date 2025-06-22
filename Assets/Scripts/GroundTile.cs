@@ -46,6 +46,11 @@ public class GroundTile : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if (other.CompareTag("Enemy"))
+        {
+            Destroy(other.gameObject);
+        }
+
         groundSpawner.SpawnTile(); // Call the SpawnTile method in the GroundSpawner script when the player exits the trigger
         Destroy(gameObject, 60);
     }
@@ -99,7 +104,7 @@ public class GroundTile : MonoBehaviour
         }
         
         enObj.transform.position = new Vector3(enObjPos.x, enObjPos.y -0.3f, enObjPos.z);
-        Destroy(enObj, 20);
+        // Destroy(enObj, 20);
     }
 
     void SpawnPickUps()
