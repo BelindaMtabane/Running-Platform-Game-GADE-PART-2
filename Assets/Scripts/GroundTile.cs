@@ -23,6 +23,8 @@ public class GroundTile : MonoBehaviour
     public GameObject portalPrefab;
     Vector3 obstaclePosition;
     public GameObject enemyPrefab; // to Assign in GroundSpawner when spawning
+    [SerializeField] public int enemySpawnStartIndex = 0; // The tile index to start spawning enemies
+
     public int tileIndex; // Sets in GroundSpawner when spawning
     List<Vector3> usedPositions = new List<Vector3>();
     float minDistance = 4f; // Minimum distance between spawned objects
@@ -40,7 +42,10 @@ public class GroundTile : MonoBehaviour
             gameManager.OnSpawnObstacle += HandleSpawnObstacle;
         }
 
-        SpawnEnemy(); // Call the SpawnEnemy
+        if (tileIndex >= enemySpawnStartIndex)
+        {
+            SpawnEnemy();
+        }
         SpawnPickUps(); // Call the SpawnCoins method to spawn coins
     }
 

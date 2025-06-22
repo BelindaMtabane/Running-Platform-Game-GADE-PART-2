@@ -68,6 +68,9 @@ public class GroundSpawner : MonoBehaviour
     Vector3 nextSpawnPosition; // Position to spawn the next ground tile
     public int LevelChange = 0; // Variable to track the level change
 
+    private int currentTileIndex = 0;
+    [SerializeField] private int enemySpawnStartIndex = 3;
+
     /*public void SpawnTile()
     {
         GameObject tempObj = Instantiate(groundTilePrefab, nextSpawnPosition, Quaternion.identity); // Instantiate the ground tile prefab
@@ -81,6 +84,16 @@ public class GroundSpawner : MonoBehaviour
     {
         GameObject tempObj = Instantiate(groundTilePrefab, nextSpawnPosition, Quaternion.identity); // Instantiate the ground tile prefab
         nextSpawnPosition = tempObj.transform.GetChild(1).transform.position; // Update the next spawn position
+
+        GroundTile tile = tempObj.GetComponent<GroundTile>();
+        if (tile != null)
+        {
+            // Set the tile index (you may want to keep a counter in GroundSpawner)
+            tile.tileIndex = currentTileIndex;
+            // Set the enemy spawn start index (e.g., 3 to start spawning on the 4th tile)
+            tile.enemySpawnStartIndex = enemySpawnStartIndex;
+            currentTileIndex++;
+        }
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Start()
