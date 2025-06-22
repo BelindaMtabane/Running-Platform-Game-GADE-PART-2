@@ -958,6 +958,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundTilePrefab: {fileID: 1679264398347904330, guid: 8c617004a51584d4f9da61f918c2d18c, type: 3}
+  LevelChange: 0
 --- !u!4 &65033622
 Transform:
   m_ObjectHideFlags: 0
