@@ -304,12 +304,26 @@ public class PlayerMovement : MonoBehaviour
 
     public IEnumerator SlowDownPlayer(int duration)
     {
-        float originalSpeed = speed; // Store the original speed
-        speed = 2f; // Reduce the player's speed
-        yield return new WaitForSeconds(duration); // Wait for the specified duration
-        speed = originalSpeed; // Revert to the original speed
-    }
+        float originalSpeed = speed;
 
+        if (duration > 0)
+        {
+            speed = 2f; // Slowdown value
+            yield return new WaitForSeconds(duration);
+        }
+        else if (duration < 0)
+        {
+            float boostMultiplier = Mathf.Clamp(1f + Mathf.Abs(duration) * 0.1f, 1f, 3f);
+            float boostDuration = Mathf.Abs(duration); // How long to stay boosted
+
+            speed = originalSpeed * boostMultiplier;
+            Debug.Log($"Speed BOOSTED to {speed} for {boostDuration} seconds");
+
+            yield return new WaitForSeconds(boostDuration);
+        }
+
+        speed = originalSpeed;
+    }
 
     public void UpdateUI()
     {

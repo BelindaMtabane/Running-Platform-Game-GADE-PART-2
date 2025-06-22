@@ -155,11 +155,12 @@ MonoBehaviour:
   healthPrefab: {fileID: 4856993604246129497, guid: 85c10287721256b4db361c6281fd63b0, type: 3}
   coalPrefab: {fileID: 2438058047285665826, guid: 7e06752e6834e49479f77fc12b5333bd, type: 3}
   pointsPrefab: {fileID: 1223494298831387111, guid: 8b30bc9d757ac82438b6f105c88042cd, type: 3}
-  timeorbPrefab: {fileID: 5814562266195803914, guid: a21cae2fc3fbccd4895b08c67f35d748, type: 3}
+  timeorbPrefab: {fileID: 5814562266195803914, guid: 4499f1adc64e09b4a9c0f298f833e967, type: 3}
   HandPrefab: {fileID: 4686647403150987920, guid: 152501604f37f3a41804db654fbea14e, type: 3}
   SpikePrefab: {fileID: 1007172255663432511, guid: c17d941f48df277469545ab9e26e8162, type: 3}
   portalPrefab: {fileID: 7544930993466503378, guid: 568c37a1c19e1474e9edea79438132cf, type: 3}
   enemyPrefab: {fileID: 7608168917093171366, guid: aa133b7602682a54ba74161e0a08676a, type: 3}
+  enemySpawnStartIndex: 0
   tileIndex: 0
 --- !u!1 &2014612807885907821
 GameObject:
