@@ -399,7 +399,7 @@ MonoBehaviour:
   jumpMax: 2.1
   delayForce: 0.21
   countdownTimer: 3
-  deathMenu: {fileID: 0}
+  deathMenu: {fileID: 1375837096}
 --- !u!54 &25367220
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3186,7 +3186,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicSource: {fileID: 1424429119}
+  SoundEffectSource: {fileID: 0}
   background: {fileID: 8300000, guid: 570c7d7528efb8e4cb0f3781d1f90ea1, type: 3}
+  timeOrb: {fileID: 0}
+  health: {fileID: 0}
+  point: {fileID: 0}
+  coal: {fileID: 0}
+  death: {fileID: 0}
+  portal: {fileID: 0}
+  shooting: {fileID: 0}
+  buttonMenu: {fileID: 0}
+  enemy: {fileID: 0}
 --- !u!4 &646717968
 Transform:
   m_ObjectHideFlags: 0
@@ -7696,6 +7706,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundTilePrefab: {fileID: 1679264398347904330, guid: 1aeeb4e41cf65184d85d633791dba120, type: 3}
+  LevelChange: 0
 --- !u!4 &1818484560
 Transform:
   m_ObjectHideFlags: 0
