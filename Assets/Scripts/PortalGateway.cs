@@ -34,7 +34,7 @@ public class PortalGateWay : MonoBehaviour
             }
             else if (portalPrefab == null)
             {
-                Debug.LogError("Portal prefab is not assigned!"); // Log an error if the portal prefab is not set
+                Debug.Log("Portal prefab is not assigned!"); // Log an error if the portal prefab is not set
             }
 
             else

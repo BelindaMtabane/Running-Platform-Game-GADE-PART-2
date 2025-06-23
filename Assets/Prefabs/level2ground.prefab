@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3261985578383085094}
   - component: {fileID: 4260773248736808202}
   - component: {fileID: 9010450871209403754}
-  - component: {fileID: 402861557532251827}
   m_Layer: 0
   m_Name: level2ground
   m_TagString: Ground
@@ -133,30 +132,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &402861557532251827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4149288560653304102}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a4fb106ae076461c8cabaefc81fd620, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
-  obstaclePrefab: {fileID: 5278501258699618783, guid: 98f21e6afeddb9c419f792799a1735b2, type: 3}
-  pickupPrefab: []
-  healthPrefab: {fileID: 4856993604246129497, guid: 85c10287721256b4db361c6281fd63b0, type: 3}
-  coalPrefab: {fileID: 2438058047285665826, guid: 7e06752e6834e49479f77fc12b5333bd, type: 3}
-  pointsPrefab: {fileID: 1223494298831387111, guid: 8b30bc9d757ac82438b6f105c88042cd, type: 3}
-  timeorbPrefab: {fileID: 919132149155446097, guid: 0136abae75221dc4e8e1ba4f9d24c63b, type: 3}
-  HandPrefab: {fileID: 4686647403150987920, guid: 152501604f37f3a41804db654fbea14e, type: 3}
-  SpikePrefab: {fileID: 1007172255663432511, guid: c17d941f48df277469545ab9e26e8162, type: 3}
-  portalPrefab: {fileID: 7544930993466503378, guid: 568c37a1c19e1474e9edea79438132cf, type: 3}
-  enemyPrefab: {fileID: 3011868141599834431, guid: d6fdbff2fe997174a8ea7603e6b8dc32, type: 3}
-  tileIndex: 0
 --- !u!1001 &723422512481159043
 PrefabInstance:
   m_ObjectHideFlags: 0

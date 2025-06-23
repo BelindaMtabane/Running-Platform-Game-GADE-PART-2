@@ -1,4 +1,5 @@
 
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -12,9 +13,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] TMP_Text ObstacleCollision;
     public Animator animator;
+    GameManager gameManager; // Reference to the GameManager script
     AudioManager audioManager; // Reference to the AudioManager script
     private bool isPlayerInTrigger = false;
     [SerializeField] float followSpeed = 3f; // Adjust as needed
+    public static int beatenScore = 0;
+    public static event Action<int> OnEnemyBeaten; // Sends enemyScore to subscribers
+
 
     void Start()
     {
@@ -22,8 +27,12 @@ public class Enemy : MonoBehaviour
         player = playerMovement.transform; // Assign the player's transform
         animator = GetComponent<Animator>();
         obstacleScript = GameObject.FindAnyObjectByType<Obstacle>(); // Find the Obstacle script in the scene
-        obstacleScript = GetComponent<Obstacle>();// This will control the Obstacle's position in the game
-        audioManager.PlaySoundEffects(audioManager.enemy); // Play the enemy sound effect
+        if (audioManager != null)
+        {
+            audioManager.PlaySoundEffects(audioManager.enemy);
+        }
+        gameManager = GameObject.FindAnyObjectByType<GameManager>(); // Find the GameManager script in the scene
+
     }
 
     private void Awake()
@@ -79,15 +88,20 @@ public class Enemy : MonoBehaviour
             if (enemyHealth > playerMovement.coal && playerMovement != null)
             {
                 animator.SetTrigger("Attack"); // Trigger the attack animation
+                Debug.Log("Enemy killed the player by attack!");
                 Invoke("ResetBattleCryttack", 2.0f);
             }
             else
             {
                 // Destroy the enemy
                 animator.SetTrigger("Die"); // Trigger the death animation
+                Debug.Log("Enemy defeated!");
+                beatenScore++;
+                Debug.Log("Boss beaten score incremented by " + beatenScore);
+                // Fire event
+                OnEnemyBeaten?.Invoke(beatenScore);
                 Invoke("ContinueGame", 2.0f); // Continue the game after 2 seconds
             }
-
         }
     }
 

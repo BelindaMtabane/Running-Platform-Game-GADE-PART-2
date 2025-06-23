@@ -100,20 +100,8 @@ public class GroundSpawner : MonoBehaviour
     {
         for (int i = 0; i < 11; i++) // Spawn 10 ground tiles
         {
-            i = i + LevelChange; // Increment the level change
             SpawnTile();// Spawn the ground first
         }
-    }
-    public int levelGenarator()
-    {
-        if (LevelChange == 11) // Check if the level change is less than 10
-        {
-            int levelPlay =  Random.Range(0, 3); // Generate a random number between 0 and 3
-            Debug.Log("Level next to Play is: Level " + levelPlay); // Log the level change and generated level play
-            return levelPlay; // Return the updated level change
-        }
-        Debug.Log("LevelGenerator was called but LevelChange is not 11");
-        return -1;
     }
 
     //[SerializeField] GameObject groundTilePrefab; // Prefab for the ground tile

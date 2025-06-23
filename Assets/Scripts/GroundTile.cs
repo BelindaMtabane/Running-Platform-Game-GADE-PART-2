@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,11 +6,8 @@ public class GroundTile : MonoBehaviour
 {
     GroundSpawner groundSpawner; // Reference to the GroundSpawner script
     public GameManager gameManager;
-    //public GameObject rockPrefab;
     [SerializeField] GameObject obstaclePrefab; // Prefab for the obstacle
-    //[SerializeField] private Obstacle obstacleScript; // Assign this in the Inspector
-    // Position to spawn the obstacle
-                               // [SerializeField] GameObject coinPrefab; // Prefab for the coin, {HealthCoin, SheinCoin, SpeedUpCoin, PointsCoin}
+   
     public GameObject[] pickupPrefab;// Prefab for the pick up
     private Collider groundCollider;
     public GameObject healthPrefab;
@@ -22,6 +19,8 @@ public class GroundTile : MonoBehaviour
     public GameObject SpikePrefab;
     public GameObject portalPrefab;
     Vector3 obstaclePosition;
+    public static event Action<int> OnBossPassed; // Sends enemyScore to subscribers
+
     public GameObject enemyPrefab; // to Assign in GroundSpawner when spawning
     [SerializeField] public int enemySpawnStartIndex = 0; // The tile index to start spawning enemies
 
@@ -30,6 +29,7 @@ public class GroundTile : MonoBehaviour
     float minDistance = 4f; // Minimum distance between spawned objects
 
     public static int obstacleScore = 0; // Static variable to keep track of the number of obstacles passed
+    public static int enemyScore = 0;
 
     void Start()
     {
@@ -44,7 +44,7 @@ public class GroundTile : MonoBehaviour
 
         if (tileIndex >= enemySpawnStartIndex)
         {
-            SpawnEnemy();
+           SpawnEnemy();
         }
         SpawnPickUps(); // Call the SpawnCoins method to spawn coins
     }
@@ -55,15 +55,8 @@ public class GroundTile : MonoBehaviour
         {
             Destroy(other.gameObject);
         }
-
-        groundSpawner.SpawnTile(); // Call the SpawnTile method in the GroundSpawner script when the player exits the trigger
-        Destroy(gameObject, 60);
+        Destroy(gameObject, 40);
     }
-    /*private void OnCollisionExit(Collision collision)
-    {
-        groundSpawner.SpawnTile(); // Call the SpawnTile method in the GroundSpawner script when the player exits the trigger
-        Destroy(gameObject, 120);
-    }*/
 
     // Update is called once per frame
     void Update()
@@ -105,10 +98,16 @@ public class GroundTile : MonoBehaviour
             while (Vector3.Distance(enObjPos, obstaclePosition) < 1.0f)
             {
                 enObjPos = GetRandomPointCollider(groundCollider);// Check if the coin position is the same as the obstacle position
+               
+                
             }
         }
         
         enObj.transform.position = new Vector3(enObjPos.x, enObjPos.y -0.3f, enObjPos.z);
+        enemyScore++;
+        Debug.Log("Boss score incremented by " + enemyScore);
+        // Fire event
+        OnBossPassed?.Invoke(enemyScore);
         // Destroy(enObj, 20);
     }
 
@@ -141,7 +140,6 @@ public class GroundTile : MonoBehaviour
         randomPoint.y = 1; // Set the Y coordinate to 1, matching it to the ground level
         return randomPoint;
     }
-    //ycyicuiviohbopnopbpiboipbopon
     Vector3 GetCenterPointCollider(Collider collider)
     {
         Vector3 center = collider.bounds.center;
@@ -156,7 +154,7 @@ public class GroundTile : MonoBehaviour
         while (!IsFarEnough(point) && attempts < 20)
         {
             point = GetRandomPointCollider(collider);// Generate a new random point within the collider bounds
-            Debug.Log("Collider bounds size: " + groundCollider.bounds.size);// Log the size of the collider bounds
+           // Debug.Log("Collider bounds size: " + groundCollider.bounds.size);// Log the size of the collider bounds
             attempts++;// Increment the attempts counter
         }
 
@@ -183,31 +181,3 @@ public class GroundTile : MonoBehaviour
     }
 
 }
-
-/* public static int tileCounter = 0; // Static variable to keep track of the number of tiles spawned
- * public gameObject enemyPrefab; // Prefab for the enemy
- * public transform player; // Reference to the player transform
- * 
- * void start()
- * {
- * 
- *       tile counter++; // Increment the tile counter when a new tile is spawned
- *           if (tileCounter == 6) // Check if this is the 6th tile
- *           {
- *                   spawn enemy(); // Call the method to spawn the enemy
- *           }
- * }
- * void spawn enemy()
- * {
- * 
- *      Vector3 spawn position = player.position + player.forward * 2.0f; // Spawn the enemy in front of the player
- * 
- *      gameObject enemy = instantiate(enemyPrefab, spawnPosition, quaternion.identity); // Instantiate the enemy prefab
- *      
- *      vector3  lookAt = player.position; // Set the enemy's look-at position to the player's position
- *      lookAt.y = enemy.transform.position.y; // Keep the Y coordinate the same
- *      enemy.transform.LookAt(lookAt); // Make the enemy look at the player
- * }
- * 
- * 
- * */

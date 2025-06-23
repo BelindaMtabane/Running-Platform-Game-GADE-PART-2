@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     float elapsedTime = 0f; // This is the elapsed time since the game started
 
     public int points = 0; // This is the score of the player
-    public int health = 50000; // This is the health of the player
+    public int health = 100; // This is the health of the player
     [SerializeField] int maxHealth = 100; // This is the maximum health of the player
     public int coal = 0; // This is the coal of the player
 
