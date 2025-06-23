@@ -23,6 +23,16 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1; // Time to normal
         pauseMenu.SetActive(false);//Resume the game
     }
+    public void restartlevelTwo()
+    {
+        SceneManager.LoadScene("Level2Scene");//Restart level two
+        Time.timeScale = 1; // Time to normal
+    }
+    public void playleveltwo()
+    {
+        SceneManager.LoadScene("Level2Scene");//Load level two
+        Time.timeScale = 1; // Time to normal
+    }
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);//Restart the game
@@ -64,14 +74,12 @@ public class PauseMenu : MonoBehaviour
     {
         levelMenu.SetActive(false);
         SceneManager.LoadScene("SampleScene");//Load level one
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);//Restart the game
         Time.timeScale = 1; // Time to normal
     }
-    /*public void levelTwo()
+    public void levelTwo()
     {
         levelMenu.SetActive(false);
-        SceneManager.LoadScene("LevelTwo");//Load level two
+        SceneManager.LoadScene("Level2Scene");//Load level two
         Time.timeScale = 1; // Time to normal
     }
-        */
 }
