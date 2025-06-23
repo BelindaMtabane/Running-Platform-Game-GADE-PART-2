@@ -56,10 +56,14 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isPlayerMoving = false; // Flag to track if the player is moving
 
-/// <summary>
-/// /Updated upstream
-/// </summary>
-   // GameObject deathMenu;
+
+    public string playeName; // Player's name, can be set in the Inspector or through other scripts
+    [SerializeField] private GameObject loginPanel;
+
+    /// <summary>
+    /// /Updated upstream
+    /// </summary>
+    // GameObject deathMenu;
 
     [SerializeField] GameObject deathMenu;
     AudioManager audioManager; // Reference to the AudioManager script
@@ -81,18 +85,44 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        //deathMenu = GameObject.FindGameObjectWithTag("DeathMenu");
-        //deathMenu.SetActive(false); // Hide the death menu at the start
-        rigidbody = GetComponent<Rigidbody>();//This will control the PLayer's position in the game
-        obstacle = GetComponent<Obstacle>();// This will control the Obstacle's position in the game
-       
+        rigidbody = GetComponent<Rigidbody>();
+        obstacle = GetComponent<Obstacle>();
+
+        // Check if player is logged in (playerName is set)
+        if (string.IsNullOrEmpty(playeName))
+        {
+            if (loginPanel != null)
+                loginPanel.SetActive(true);
+
+            isPlayerMoving = false; // Prevent movement
+            countdownTimer = 3f;    // Reset countdown so it doesn't run in background
+        }
+        else
+        {
+            if (loginPanel != null)
+                loginPanel.SetActive(false);
+
+            StartCountdown(); // Start the countdown if already logged in
+        }
     }
+
     public void StartCountdown()
     {
-        countdownText.text = "Starting in: " + countdownTimer.ToString(); // Show initial countdown
-        // Call the method to start moving Player
-        StartMovement();// Start moving
+        countdownTimer = 3f; // Always reset countdown when starting
+        countdownText.text = "Starting in: " + countdownTimer.ToString();
+        countdownText.gameObject.SetActive(true);
+        isPlayerMoving = false;
     }
+
+    public void OnPlayerLoggedIn(string playerName)
+    {
+        this.playeName = playerName;
+        if (loginPanel != null)
+            loginPanel.SetActive(false);
+
+        StartCountdown();
+    }
+
     public void StartMovement()
     {
         isPlayerMoving = true; // Set to true for player to move
@@ -118,19 +148,19 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!isAlive) return; // If the player is not alive, do not move
+        if (!isAlive) return;
+        if (string.IsNullOrEmpty(playeName)) return; // <--- Prevent countdown and movement if not logged in
 
-        Vector3 moveDelay = new Vector3(0, 0, 0); // Initialize the movement vector
         // Handle countdown timer
         if (countdownTimer > 0)
         {
-            countdownTimer -= Time.deltaTime; // Decrement countdown time
-            countdownText.text = "Starting in: " + Mathf.Ceil(countdownTimer).ToString(); // Update the countdown text
+            countdownTimer -= Time.deltaTime;
+            countdownText.text = "Starting in: " + Mathf.Ceil(countdownTimer).ToString();
         }
         else if (!isPlayerMoving)
         {
-            StartMovement(); // Start moving when the countdown ends
-            isPlayerMoving = true; // Set to true for player to move
+            StartMovement();
+            isPlayerMoving = true;
         }
         if (isPlayerMoving)
         {
@@ -239,19 +269,15 @@ public class PlayerMovement : MonoBehaviour
                          // Restart the Game
                          //  SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reload the current scene
         obstacle.ObstacleCollision.text = "You have been killed by an Enemy!"; // Update the UI text with the death message
-        // Log current stats
-        Debug.Log(PlayerStatsManager.Instance.allGames);
+                                                                               // Log current stats
+                                                                               //  Debug.Log(PlayerStatsManager.Instance.allGames);
 
-        // Save this game's stats
-        var record = new PlayerStatsRecord
+        // Save game entry
+        PlayerStatsManager.Instance.AddGame(new PlayerStatsRecord
         {
-            points = this.points,
-            health = this.health,
-            coal = this.coal,
-            elapsedTime = 0,
-            dateTime = System.DateTime.Now.ToString()
-        };
-        PlayerStatsManager.Instance.AddGame(record);
+            playerName = playeName, // Use the player's name
+            score = this.points     // Use 'score' property, not 'points'
+        });
     }
 
     public void AddPoints(int pointsToAdd)

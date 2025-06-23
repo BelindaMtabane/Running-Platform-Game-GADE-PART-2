@@ -1,9 +1,12 @@
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+
 [System.Serializable]
 public class PlayerStatsRecord
 {
-    public int points;
-    public int health;
-    public int coal;
-    public float elapsedTime;
-    public string dateTime;
+    [BsonIgnore] // This field is ignored by MongoDB serialization
+    public ObjectId _id { get; set; }
+
+    public string playerName { get; set; }
+    public int score { get; set; }
 }
